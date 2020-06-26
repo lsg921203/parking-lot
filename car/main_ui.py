@@ -17,17 +17,17 @@ class AppWindow(tk.Frame):#frame
 
     def make_img(self, path):
         src = cv2.imread(path)
-        src = cv2.resize(src, (620, 400))
+        src = cv2.resize(src, (400, 300))
         img = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
         img = Image.fromarray(img)
         self.src = ImageTk.PhotoImage(image=img)
 
     def create_widgets(self, path):
-        #self.make_img(path)
+        self.make_img(path)
         self.frame = tk.Label(self.master, image=self.src)
-        self.frame.pack(side='right')
+        self.frame.pack(anchor='nw',padx=5, pady=5)
         self.sub_fr = tk.Frame(self.master)#frame
-        self.sub_fr.pack(side='left')
+        self.sub_fr.pack(anchor='s',padx=5,pady=5)
 
     def change_img(self, res):
         img = cv2.resize(res, (400, 300))

@@ -1,6 +1,8 @@
 import cx_Oracle
 
 class CarMember:
+    log_id = None
+
     def __init__(self, id = None, pwd=None, name = None, tel = None, car_num=None):
         self.id = id
         self.pwd = pwd
@@ -22,7 +24,7 @@ class CarMemberDao:
 
         d= (id, )
 
-        cursor.excute(sql,d)
+        cursor.execute(sql,d)
 
         mem = cursor.fetchone()
 
@@ -37,7 +39,7 @@ class CarMemberDao:
 
         cursor = conn.cursor()
 
-        sql = 'insert into test values(seq_test.nextval, :1, :2, :3, :4, :5)'
+        sql = 'insert into car_member values( :1, :2, :3, :4, :5)'#seq_test.nextval,
 
         d = (mem.id, mem.pwd, mem.name, mem.car_num, mem.tel)
 
@@ -52,7 +54,7 @@ class CarMemberDao:
 
         cursor = conn.cursor()
 
-        sql = 'update test set car_num=:1, phonenum=:2 where id=:3'
+        sql = 'update car_member set car_num=:1, phonenum=:2 where id=:3'
 
         d = (mem.car_num, mem.tel, mem.id)
 
